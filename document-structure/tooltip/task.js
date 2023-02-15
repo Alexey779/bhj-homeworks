@@ -11,6 +11,7 @@ function clean(){
     if(document.getElementsByClassName('tooltip_active').length){
         let promts = document.getElementsByClassName('tooltip_active');
         promts[0].className = 'tooltip';
+        links.nextSibling.remove();
     }
 }
 function position(element){
