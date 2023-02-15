@@ -1,38 +1,26 @@
-const btn = document.getElementById('tasks__add');
-const tasks = document.getElementById('tasks__list');
-const input = document.getElementsByTagName('input');
-
-// let closerArr = [];
-let result = '';
-
-input[0].addEventListener('input', () => {
-    result = input[0].value;
-    return;
-})
-
-let enter = () => {
-    tasks.insertAdjacentHTML('beforeend', this.element);
-}
+const btn = document.querySelector('.tasks__add');
+const tasks = document.querySelector('.tasks__list');
+const input = document.querySelector('.tasks__input');
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    if(result.length){
-        input[0].value = '';
-        this.element = `
-            <div class="task">
+    if(input.value.trim()){
+        tasks.insertAdjacentHTML('afterbegin',
+            `<div class="task">
                 <div class="task__title">
-                    ${result}
+                    ${input.value}
                 </div>
                 <a href="#" class="task__remove">&times;</a>
-            </div>
-        `;
-        enter();
-        // closerArr = Array.from(document.getElementsByClassName('task__remove'));
-        Array.from(document.getElementsByClassName('task__remove')).forEach(el => {
-            el.onclick = () => {
-                el.closest('.task').remove();
-                return false;
-            }
+            </div>`
+        );
+        input.value = '';
+
+        let task = document.querySelector(".task");
+        let taskRemove = task.querySelector(".task__remove");
+        taskRemove.addEventListener("click", () => {
+            task.remove()
         });
-    }
-})
+    };
+
+   
+});
