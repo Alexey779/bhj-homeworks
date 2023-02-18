@@ -1,34 +1,14 @@
 const links = document.getElementsByClassName('has-tooltip');
-let linksArr = Array.from(links);
-linksArr.forEach(el => {
-    let promt = document.createElement('div');
-    promt.className = 'tooltip';
-    promt.textContent = el.title;
-    el.insertAdjacentElement('afterend', promt);
-})
-document.addEventListener('scroll', clean);
-function clean(){
-    if(document.getElementsByClassName('tooltip_active').length){
-        let promts = document.getElementsByClassName('tooltip_active');
-        promts[0].className = 'tooltip';
-        links.nextSibling.remove();
-    }
-}
-function position(element){
-    let heigth = document.documentElement.clientHeight;
-    let {top, left} = element.getBoundingClientRect();
-    if(top + 100 < heigth){
-        element.nextElementSibling.style = `left: ${left}px; top: ${top + 20}px`;
-    }else{
-        element.nextElementSibling.style = `left: ${left}px; top: ${top - 30}px`;
-    }
-}
+for (let index = 0; index < links.length; index++) {
+    const element = links[index];
+    element.insertAdjacentHTML("afterend", "<div class='tooltip' style='left: 0; top: 0'> Проверка!</div>");
+    element.onclick = function () {
+        let ref = this;
+        ref.nextElementSibling.textContent = ref.title;
+        ref.nextElementSibling.style.top = ref.getBoundingClientRect().bottom + "px";
+        ref.nextElementSibling.style.left = ref.getBoundingClientRect().left + 5 + "px";
+        ref.nextElementSibling.classList.toggle("tooltip_active");
 
-linksArr.forEach(element => {
-    element.onclick = () => {
-        clean();
-        element.nextElementSibling.classList.add('tooltip_active');
-        position(element);
         return false;
-    };
-});
+    }
+}
