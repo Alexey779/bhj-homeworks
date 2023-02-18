@@ -22,13 +22,13 @@ next.onclick = () => {
     changeSlide(slideActive);
 }
 
-// Управление точками
+
 dots[slideActive].classList.add('slider__dot_active');
 [...dots].forEach((item, i) => item.onclick = () => {
     changeSlide(i);
 });
 
-// Функция переключения слайда на номер i
+
 function changeSlide(i) {
     [...sliders].forEach((item) => item.classList.remove('slider__item_active'));
     [...dots].forEach((item) => item.classList.remove('slider__dot_active'));
